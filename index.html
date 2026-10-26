@@ -341,9 +341,10 @@
         </div>
     </footer>
 
-    <!-- JavaScript Data & Logic (JSONP Bypass CORS) -->
+    <!-- JavaScript Data & Logic (Updated URL) -->
     <script>
-        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxDVCP6cFqGAbmlRcQHvlBgvS69b_xVNk-wsTzmasy1rtaMUKCHh0Tx_JGXSG3UbrCl4w/exec";
+        // URL สคริปต์ตัวใหม่ที่ฟ้าเพิ่งส่งมา
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzL3yb_8h-TqRyihqovA6Lifkdm0AK2p-6ThxcLJZ8nFVSj8m2ENJLNcRzDtdGB1nkXnA/exec";
 
         let driveCollectionItems = [];
         let currentCategory = 'all';
@@ -473,7 +474,7 @@
             if (e.target === this) closeModal();
         });
 
-        // ฟังก์ชัน Callback รองรับข้อมูลจาก JSONP
+        // Callback รองรับ JSONP
         function handleDriveData(res) {
             if (res) {
                 if (res.items && res.items.length > 0) {
@@ -495,7 +496,7 @@
         window.onload = function() {
             initTheme();
             
-            // ใช้เทคนิค JSONP ยิงข้าม CORS ผ่าน Tag <script>
+            // ดึงข้อมูลรูปภาพผ่าน JSONP
             const script = document.createElement('script');
             script.src = GAS_API_URL + "?prefix=handleDriveData";
             script.onerror = function() {
