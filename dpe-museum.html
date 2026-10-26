@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="th" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPE SPORT HERITAGE 360° | Library & Museum of Physical Education and Sports</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            green: '#00875A',
+                            yellow: '#FFC72C',
+                            dark: '#0F172A',
+                            lightBg: '#F8FAFC',
+                            cardBg: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'Prompt', 'sans-serif'],
+                        heading: ['Prompt', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .hero-banner {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%), 
+                        url('https://lh3.googleusercontent.com/d/1aabKQoCzFsLYw7yNvPU9mH42TIgWoWZY') center/cover no-repeat;
+        }
+        .filter-btn-active {
+            background-color: #00875A !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 12px rgba(0, 135, 90, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1E293B;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="antialiased bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-4">
+                    <img src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" alt="ตรากรมพลศึกษา" class="h-14 w-auto object-contain">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white tracking-tight leading-tight">
+                            DPE SPORT HERITAGE <span class="text-emerald-600 dark:text-emerald-400 font-extrabold">360°</span>
+                        </h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
+                            Digital Sports Heritage Collection | กรมพลศึกษา
+                        </p>
+                    </div>
+                </div>
+                
+                <nav class="flex items-center space-x-3 sm:space-x-5 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#3d-exhibit" class="hidden md:inline hover:text-emerald-600 dark:hover:text-emerald-400 transition">จัดแสดง 3D</a>
+                    <a href="#featured-items" class="hidden md:inline hover:text-emerald-600 dark:hover:text-emerald-400 transition">ไฮไลต์สำคัญ</a>
+                    <a href="#collection-grid" class="hidden md:inline hover:text-emerald-600 dark:hover:text-emerald-400 transition">คลังโบราณวัตถุ</a>
+                    
+                    <!-- ปุ่มติดตาม Facebook ข้างบนสุด -->
+                    <a href="https://www.facebook.com/library.dpe/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl transition shadow-sm flex items-center space-x-1.5 text-xs sm:text-sm font-medium">
+                        <i class="fa-brands fa-facebook text-base"></i>
+                        <span class="hidden sm:inline">ติดตามเพจ</span>
+                    </a>
+
+                    <!-- Dark/Light Mode Toggle Button -->
+                    <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center shadow-inner" title="สลับโหมดมืด/สว่าง">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <a href="#visit-info" class="bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-4 py-2 rounded-xl transition shadow-sm">
+                        <i class="fa-solid fa-clock mr-1.5"></i><span class="hidden sm:inline">เวลาทำการ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-banner relative min-h-[480px] flex items-center justify-center text-white py-16 px-4">
+        <div class="max-w-5xl mx-auto text-center space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-emerald-500/20 border border-emerald-400/30 px-4 py-1.5 rounded-full text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-sm">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>ห้องสมุดและพิพิธภัณฑ์การพลศึกษาและกีฬา</span>
+            </div>
+            
+            <h2 class="text-3xl sm:text-5xl font-extrabold font-heading tracking-wide leading-tight text-white drop-shadow-md">
+                Digital Sports Heritage Collection
+            </h2>
+            
+            <p class="text-base sm:text-lg text-slate-200 max-w-3xl mx-auto font-light leading-relaxed drop-shadow">
+                แหล่งเรียนรู้ แรงบันดาลใจ และคลังโบราณวัตถุทางประวัติศาสตร์การกีฬาของประเทศไทย 
+                สัมผัสสิ่งของสำคัญในพิพิธภัณฑ์กรมพลศึกษาผ่านระบบดิจิทัลและ 3D Interactive ออนไลน์
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <a href="#3d-exhibit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-7 py-3.5 rounded-2xl shadow-lg hover:shadow-emerald-500/30 transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+                    <i class="fa-solid fa-cube text-lg"></i>
+                    <span>เข้าชมพิพิธภัณฑ์ 3D</span>
+                </a>
+                <a href="#featured-items" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-medium px-7 py-3.5 rounded-2xl backdrop-blur-md transition flex items-center space-x-2">
+                    <i class="fa-solid fa-star text-amber-300 text-lg"></i>
+                    <span>วัตถุไฮไลต์ชิ้นสำคัญ</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Interactive Exhibition Section -->
+    <section id="3d-exhibit" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center space-y-2 mb-6">
+            <h3 class="text-2xl sm:text-3xl font-bold font-heading text-slate-900 dark:text-white">
+                <i class="fa-solid fa-vr-cardboard text-emerald-600 dark:text-emerald-400 mr-2"></i>นิทรรศการเสมือนจริง 3D Interactive
+            </h3>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+                สัมผัสและหมุนดูวัตถุจัดแสดงสำคัญแบบ 360 องศาผ่านโมเดล 3D เสมือนจริง
+            </p>
+        </div>
+
+        <div class="w-full bg-white dark:bg-slate-900 rounded-3xl p-3 sm:p-5 shadow-xl border border-slate-100 dark:border-slate-800">
+            <div class="relative w-full h-[550px] sm:h-[650px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+                <iframe id="museum-3d-iframe" src="https://dpelibrary-max.github.io/museumdpe3d/" class="w-full h-full border-0"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Masterpiece Section (วัตถุไฮไลต์ 6 ชิ้น) -->
+    <section id="featured-items" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-200/60 dark:border-slate-800">
+        <div class="flex items-center space-x-3 mb-6">
+            <div class="p-2.5 bg-amber-100 dark:bg-amber-900/40 rounded-2xl text-amber-600 dark:text-amber-400">
+                <i class="fa-solid fa-crown text-xl"></i>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">
+                    โบราณวัตถุและสิ่งของไฮไลต์ชิ้นสำคัญ
+                </h3>
+                <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+                    สิ่งของทรงคุณค่าทางประวัติศาสตร์ที่ไม่ควรพลาดชมประจำพิพิธภัณฑ์การพลศึกษาและกีฬา
+                </p>
+            </div>
+        </div>
+
+        <!-- Featured Items Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <!-- 1. โต๊ะอธิบดีคนแรก -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-desk" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="โต๊ะอธิบดี">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">โต๊ะทำงานอธิบดีคนแรก</h4>
+            </div>
+
+            <!-- 2. ถ้วยรางวัลฟีฟ่า -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-fifa" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="ถ้วยฟีฟ่า">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">ถ้วยรางวัลฟีฟ่า (FIFA)</h4>
+            </div>
+
+            <!-- 3. แท่นที่ประทับ -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-podium" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="แท่นที่ประทับ">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">แท่นที่ประทับรับรางวัล ร.9</h4>
+            </div>
+
+            <!-- 4. พระพลบดี -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-god" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="พระพลบดี">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">องค์พระพละพลบดีจำลอง</h4>
+            </div>
+
+            <!-- 5. รูปปั้นอัศวิน -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-knight" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="รูปปั้นอัศวิน">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">รูปปั้นอัศวินทรงม้า</h4>
+            </div>
+
+            <!-- 6. โน้ตเพลงกราวกีฬา -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-amber-200/70 dark:border-amber-900/50 hover:shadow-md transition text-center flex flex-col items-center justify-between">
+                <div class="h-32 w-full bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center p-1 mb-3 overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img id="feat-song" src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" class="w-full h-full object-cover rounded-lg" alt="โน้ตเพลงกราวกีฬา">
+                </div>
+                <span class="text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 px-2 py-0.5 rounded-full mb-1">ชิ้นไฮไลต์</span>
+                <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 font-heading">ต้นฉบับเพลงกราวกีฬา</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Museum Collection Grid Section -->
+    <section id="collection-grid" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-200/60 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+            <div>
+                <h3 class="text-2xl sm:text-3xl font-bold font-heading text-slate-900 dark:text-white">
+                    คลังโบราณวัตถุและของที่ระลึกทั้งหมด
+                </h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-1">
+                    รวบรวมของสะสม ถ้วยรางวัล เหรียญที่ระลึก และโบราณวัตถุทางประวัติศาสตร์ (<span id="count-all">0</span> รายการ)
+                </p>
+            </div>
+            
+            <!-- Search Box -->
+            <div class="relative w-full md:w-80">
+                <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="ค้นหาลำดับ/ชื่อสิ่งของ..." class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800 dark:text-slate-200">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500 text-sm"></i>
+            </div>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 custom-scrollbar mb-8">
+            <button onclick="filterCategory('all', this)" class="filter-btn filter-btn-active bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                ทั้งหมด
+            </button>
+            <button onclick="filterCategory('1', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                1. กีฬาแหลมทอง
+            </button>
+            <button onclick="filterCategory('2', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                2. โอลิมปิกเกมส์
+            </button>
+            <button onclick="filterCategory('3', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                3. เอเชียนเกมส์
+            </button>
+            <button onclick="filterCategory('4', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                4. ซีเกมส์
+            </button>
+            <button onclick="filterCategory('5', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                5. Asian Indoor Games
+            </button>
+            <button onclick="filterCategory('6', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                6. เฟสปิคเกมส์
+            </button>
+            <button onclick="filterCategory('7', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                7. อาเซียนพาราเกมส์
+            </button>
+            <button onclick="filterCategory('8', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                8. วันลูกเสือโลก
+            </button>
+            <button onclick="filterCategory('9', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                9. กีฬานักเรียน/โรงเรียน
+            </button>
+            <button onclick="filterCategory('10', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                10. ของที่ระลึกกรมพลศึกษา
+            </button>
+            <button onclick="filterCategory('11', this)" class="filter-btn bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">
+                11. เสื้อเบลเซอร์/ของรับมอบ
+            </button>
+        </div>
+
+        <!-- Collection Grid Cards Container -->
+        <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full py-12 text-center text-slate-400">
+                <i class="fa-solid fa-spinner fa-spin text-4xl mb-3 text-emerald-600 dark:text-emerald-400"></i>
+                <p class="text-base font-medium">กำลังโหลดคลังโบราณวัตถุ...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Dialog Popups -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="visit-info" class="bg-slate-900 text-white pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-slate-800">
+                <!-- คอลัมน์ที่ 1: ข้อมูลห้องสมุด -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv" alt="กรมพลศึกษา" class="h-12 w-auto">
+                        <span class="font-bold font-heading text-lg">DPE SPORT HERITAGE</span>
+                    </div>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                        ห้องสมุดและพิพิธภัณฑ์การพลศึกษาและกีฬา กรมพลศึกษา กระทรวงการท่องเที่ยวและกีฬา
+                    </p>
+                    <ul class="text-slate-400 text-xs sm:text-sm space-y-2">
+                        <li><i class="fa-solid fa-calendar mr-2 text-emerald-500"></i>วันทำการ: วันจันทร์ - วันศุกร์</li>
+                        <li><i class="fa-solid fa-clock mr-2 text-emerald-500"></i>เวลา: 08:30 - 16:30 น.</li>
+                        <li><i class="fa-solid fa-map-pin mr-2 text-emerald-500"></i>สนามศุภชลาศัย ระหว่างประตู 12 - 13</li>
+                    </ul>
+                </div>
+
+                <!-- คอลัมน์ที่ 2: ช่องทางติดตาม Facebook -->
+                <div>
+                    <h5 class="font-bold text-sm uppercase tracking-wider text-emerald-400 mb-3">ติดตามข่าวสารกิจกรรม</h5>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                        ติดตามข้อมูลข่าวสาร นิทรรศการใหม่ๆ และกิจกรรมของห้องสมุดและพิพิธภัณฑ์การพลศึกษาและกีฬาได้ทาง Facebook Page
+                    </p>
+                    <a href="https://www.facebook.com/library.dpe/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition shadow-md">
+                        <i class="fa-brands fa-facebook text-lg"></i>
+                        <span>ห้องสมุดและพิพิธภัณฑ์การพลศึกษาและกีฬา</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-xs text-slate-500">
+                &copy; 2026 Department of Physical Education. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // URL เชื่อมต่อ API ดึงข้อมูลจาก Google Drive
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxDVCP6cFqGAbmlRcQHvlBgvS69b_xVNk-wsTzmasy1rtaMUKCHh0Tx_JGXSG3UbrCl4w/exec";
+
+        let driveCollectionItems = [];
+        let currentCategory = 'all';
+
+        // ระบบสลับ Dark / Light Mode
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-lg';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-lg text-amber-400';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                if (icon) icon.className = 'fa-solid fa-sun text-lg text-amber-400';
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (icon) icon.className = 'fa-solid fa-moon text-lg';
+            }
+        }
+
+        function renderCards() {
+            const container = document.getElementById('cards-container');
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase().trim();
+            container.innerHTML = '';
+
+            let filtered = driveCollectionItems;
+
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(item => item.cat === currentCategory);
+            }
+
+            if (searchKeyword !== '') {
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(searchKeyword) || 
+                    (item.numCode && item.numCode.toLowerCase().includes(searchKeyword)) ||
+                    item.tag.toLowerCase().includes(searchKeyword)
+                );
+            }
+
+            if (!filtered || filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 dark:text-slate-500">
+                        <i class="fa-solid fa-box-open text-5xl mb-3 text-slate-300 dark:text-slate-600"></i>
+                        <p class="text-base font-medium">ไม่พบวัตถุจัดแสดงในหมวดหมู่นี้</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const indexInAll = driveCollectionItems.indexOf(item);
+                const cardHtml = `
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition border border-slate-100 dark:border-slate-800 flex flex-col justify-between">
+                        <div class="p-5">
+                            <div class="h-52 rounded-xl overflow-hidden mb-4 relative bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 flex items-center justify-center p-2">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv'">
+                                <span class="absolute top-3 left-3 bg-emerald-600 dark:bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                    ${item.tag}
+                                </span>
+                            </div>
+                            <h4 class="font-bold text-base font-heading text-slate-900 dark:text-white mb-2 leading-snug">${item.title}</h4>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <button onclick="openDynamicModalByIndex(${indexInAll})" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-slate-700 dark:text-slate-200 hover:text-white text-xs font-semibold py-2.5 rounded-xl transition">
+                                อ่านรายละเอียดเพิ่มเติม
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        function filterCategory(category, btn) {
+            currentCategory = category;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('filter-btn-active');
+            });
+            if (btn) btn.classList.add('filter-btn-active');
+            renderCards();
+        }
+
+        function handleSearch() {
+            renderCards();
+        }
+
+        function openDynamicModalByIndex(index) {
+            const item = driveCollectionItems[index];
+            if (!item) return;
+
+            const modalContent = document.getElementById('modal-content');
+
+            modalContent.innerHTML = `
+                <div class="h-64 sm:h-72 rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 mb-6 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-4">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/d/1I2WSerM9LimUAq4uTjN2QXB5FSm8nCOv'">
+                </div>
+                <div class="inline-block px-3 py-1 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-xs font-semibold rounded-full mb-3">
+                    ${item.tag}
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white mb-4">${item.title}</h3>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6 whitespace-pre-line">${item.desc}</p>
+                <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                    <span><i class="fa-solid fa-building-columns mr-1.5 text-emerald-600 dark:text-emerald-400"></i>ห้องสมุดและพิพิธภัณฑ์การพลศึกษาและกีฬา</span>
+                    <span>กรมพลศึกษา</span>
+                </div>
+            `;
+
+            document.getElementById('modal-container').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.add('hidden');
+        }
+
+        document.getElementById('modal-container').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        window.onload = function() {
+            initTheme();
+            
+            // ดึงข้อมูลรูปภาพจาก Google Drive ผ่าน API
+            fetch(GAS_API_URL)
+                .then(res => res.json())
+                .then(res => {
+                    if (res) {
+                        if (res.items && res.items.length > 0) {
+                            driveCollectionItems = res.items;
+                            document.getElementById('count-all').innerText = res.items.length;
+                            renderCards();
+                        }
+                        if (res.featured) {
+                            if (res.featured.desk) document.getElementById('feat-desk').src = res.featured.desk;
+                            if (res.featured.podium) document.getElementById('feat-podium').src = res.featured.podium;
+                            if (res.featured.god) document.getElementById('feat-god').src = res.featured.god;
+                            if (res.featured.knight) document.getElementById('feat-knight').src = res.featured.knight;
+                            if (res.featured.fifa) document.getElementById('feat-fifa').src = res.featured.fifa;
+                            if (res.featured.song) document.getElementById('feat-song').src = res.featured.song;
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.error("Error loading API:", err);
+                    document.getElementById('cards-container').innerHTML = `
+                        <div class="col-span-full py-12 text-center text-red-500 font-medium">
+                            เกิดข้อผิดพลาดในการโหลดข้อมูลรูปภาพ โปรดลองใหม่อีกครั้ง
+                        </div>
+                    `;
+                });
+        };
+    </script>
+</body>
+</html>
